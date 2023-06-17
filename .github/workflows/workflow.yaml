@@ -18,25 +18,18 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
+
+      - name: System libraries
+        run: sudo apt-get install -y librdf0-dev
           
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
       
-      - name: System libraries
+      - name: Install R dependencies
         run: |
-          sudo apt-get install -y librdf0-dev
-        
-      - name: Install R Dependencies
-        run: |
-          Rscript -e "install.packages('devtools'); devtools::install_deps(build=FALSE)"
-
-          #- uses: r-lib/actions/setup-r-dependencies@v2
-          #with:
-          #cache-version: 2
-          #extra-packages: |
-          #any::remotes
-          #any::blogdown
-          #any::devtools
+          install.packages(c("remotes"))
+          remotes::install_deps(dependencies = TRUE)
+        shell: Rscript
 
       - name: Check installed packages
         run: |
