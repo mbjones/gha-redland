@@ -24,7 +24,8 @@ jobs:
       
       - name: System libraries
         run: |
-          sudo apt-get -y install librdf0-dev libraptor2-dev
+          sudo apt-get install -y libpng-dev
+          #sudo apt-get install -y librdf0-dev
         
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
