@@ -24,16 +24,22 @@ jobs:
       
       - name: System libraries
         run: |
-          sudo apt-get install -y libpng-dev
-          #sudo apt-get install -y librdf0-dev
+          sudo apt-get install -y librdf0-dev
         
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          cache-version: 2
-          extra-packages: |
-            any::remotes
-            any::blogdown
-            any::devtools
+      - name: Install R Dependencies
+        run: |
+          Rscript -e "devtools::install_deps()"
+
+          #- uses: r-lib/actions/setup-r-dependencies@v2
+          #with:
+          #cache-version: 2
+          #extra-packages: |
+          #any::remotes
+          #any::blogdown
+          #any::devtools
 
       - name: Check installed packages
-        run: sh _check_redland.sh
+        run: |
+            apt list |grep librdf; \
+            Rscript -e "library(dataone); devtools::session_info()" # Print the session when dataone loads
+
