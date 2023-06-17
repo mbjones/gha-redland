@@ -28,7 +28,7 @@ jobs:
         
       - name: Install R Dependencies
         run: |
-          Rscript -e "install.packages('devtools'); devtools::install_deps()"
+          Rscript -e "install.packages('devtools'); devtools::install_deps(build=FALSE)"
 
           #- uses: r-lib/actions/setup-r-dependencies@v2
           #with:
