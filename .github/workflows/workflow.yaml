@@ -30,7 +30,7 @@ jobs:
         with:
           path: |
             ${{ env.R_LIBS_USER }}/*
-          key: ${{ format('{0}', hashFiles(format('{0}/DESCRIPTION', inputs.working-directory ))) }}
+          key: ${{ runner.os }}-build-R-${{ hashFiles('**/DESCRIPTION') }}
 
       - name: Install R dependencies
         run: |
