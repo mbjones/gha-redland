@@ -34,6 +34,7 @@ jobs:
 
       - name: Install R dependencies
         run: |
+          options(repos = c(REPO_NAME = "https://packagemanager.posit.co/cran/__linux__/jammy/latest"))
           install.packages(c("remotes"))
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
